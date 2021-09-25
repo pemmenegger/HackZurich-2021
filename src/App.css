@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap');
+
 .App {
   text-align: center;
 }
@@ -36,3 +38,52 @@
     transform: rotate(360deg);
   }
 }
+
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-appear-active,
+.fade-enter-active {
+  transition: opacity 0.4s linear;
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 0;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+
+.slider-box {
+  width: 100%;
+  position: relative;
+
+  .label {
+    width: 30%;
+    position: absolute;
+    right: 0;
+
+    #non-linear-slider {
+      line-height: 46px;
+      vertical-align: middle;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: $semi-bold;
+      font-size: 20px;
+      margin-left: 20px;
+    }
+  }
+
+  .MuiSlider-colorPrimary {
+    width: 65%;
+    left: 15px;
+  }
+}
+
+.MuiSlider-thumb.Mui-active {
+  box-shadow: 0px 0px 0px 14px rgba(34, 34, 34, .1) !important;
+}
+

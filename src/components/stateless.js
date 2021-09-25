@@ -2,15 +2,15 @@ import React from 'react';
 
 export const Question = (props) => {
     return (
-        <div className="question">
+        <div className="font-body">
             {props.children}
         </div>
     )
 }
 
-export const QuestionTitle = (props) => {
+export const StickyBottom = (props) => {
     return (
-        <div className="title">
+        <div className="absolute bottom-3 w-11/12">
             {props.children}
         </div>
     )
@@ -18,9 +18,12 @@ export const QuestionTitle = (props) => {
 
 export const Logo = (props) => {
     return (
-        <div className="logo">
-            {props.children}
-        </div>
+        <img
+          src={process.env.PUBLIC_URL +'/logo.png'}
+          title="Story Hub"
+          className="mt-12 mb-9 mr-auto ml-auto w-16 h-auto"
+          alt="Story Hub Logo"
+        />
     )
 }
 
@@ -58,33 +61,46 @@ export const SettingsIcon = (props) => {
     )
 }
 
+
+export const SelectedIcon = (props) => {
+    return (
+        <img
+          src={process.env.PUBLIC_URL +'/selected.png'}
+          title="Selected"
+          className={props.className}
+          alt="Selected"
+        />
+    )
+}
+
+
 /**
  * BUTTONS
  */
 
 const Button = (props) => {
     const {
-        isSubmitting,
         value,
         onClick,
-        theme,
+        className,
     } = props;
+
     return (
-        <button onClick={() => onClick()} className={theme}>
-            {isSubmitting ? <div className="loadingSubmit"></div> : value}
-        </button>
+        <div onClick={() => onClick()} className={"w-full mb-4 pt-4 pb-4 rounded-lg text-m	" + className}>
+            {value}
+        </div>
     )
 }
 
 export const ButtonPrimary = (props) => {
     return (
-        <Button {...props} theme="btn-primary"/>
+        <Button {...props} className="bg-violett text-white text-center"/>
     )
 }
 
 export const ButtonSecondary = (props) => {
     return (
-        <Button {...props} theme="btn-secondary" />
+        <Button {...props} className="bg-white text-black border border-black text-center" />
     )
 }
 
@@ -93,9 +109,9 @@ export const ButtonSelect = (props) => {
         isSelected
     } = props;
     return (
-        <div className="btn-select-wrapper">
-            <Button {...props} theme="btn-select" />
-            {isSelected ? <div className="icon-select"></div> : null}            
+        <div className="relative h-70">
+            <Button {...props} className="bg-lightGrey text-black text-left pl-4" />
+            {isSelected ? <SelectedIcon className="h-5 w-auto absolute right-0 top-1/2 transform -translate-y-1/2 mr-4" /> : null}            
         </div>
     )
 }

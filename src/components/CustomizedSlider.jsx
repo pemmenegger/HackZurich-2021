@@ -30,12 +30,11 @@ const theme = createTheme({
 });
 
 
-export default function StoryHubSlider() {
-  const [value, setValue] = React.useState(15);
+export const CustomizedSlider = (props) => {
 
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
-      setValue(newValue);
+      props.onChange(newValue)
     }
   };
 
@@ -43,12 +42,12 @@ export default function StoryHubSlider() {
     <Box sx={{ width: '100%' }} className="slider-box">
         <div className="label">
             <Typography id="non-linear-slider" gutterBottom> 
-                {value} Min
+                {props.value} Min
             </Typography>
         </div>
         <div className="slider">
             <Slider
-                value={value}
+                value={props.value}
                 min={1}
                 step={1}
                 max={30}

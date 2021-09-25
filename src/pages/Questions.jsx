@@ -2,9 +2,10 @@ import React from 'react';
 import FadeInOut from '../components/transitions/FadeInOut.jsx';
 import { Question, QuestionTitle, ButtonPrimary, ButtonSecondary, Logo, OrSeparator, ButtonSelect } from "../components/stateless.js"
 import StoryCard from '../components/StoryCard';
-import Slider from '../components/Slider';
+import  { CustomizedSlider } from '../components/CustomizedSlider';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { api, handleError } from '../components/api.js';
 
 class Questions extends React.Component {
 	
@@ -12,13 +13,21 @@ class Questions extends React.Component {
 		super();
         this.state = {
             step: 'time',
-            format: 'best-experience'
+            time: 15,
+            format: 'best-experience',
+            stories: null
         };
 	}
 
-    changeView(newView) {
+    changeStep(newStep) {
         this.setState({
-            step: newView
+            step: newStep
+        })
+    }
+
+    changeTime(newTime) {
+        this.setState({
+            time: newTime
         })
     }
 
@@ -27,6 +36,37 @@ class Questions extends React.Component {
             format: newFormat
         })
     }
+
+    async requestStories() {
+        try {
+            const requestBody = JSON.stringify({
+                time: this.state.time * 60,
+                format: this.state.format,
+                interests: [
+                    "Europe",
+                    "Technology"
+                ]
+            });
+            const response = await api.post(`/stage/selectStories`, requestBody);
+            let data = JSON.parse(response.data.body)
+            this.setState({
+                stories: data.storyIds
+            })
+            console.log(this.state.stories)
+        } catch (error) {
+            handleError(error)
+            console.log(error)
+        } finally {
+            this.changeStep('story')
+        }
+    }
+
+    openStory(storyId) {
+        this.props.history.push({
+            pathname: '/story',
+            state: { storyId: storyId },
+        })
+    }   
 
     renderCurrentQuestion() {
         let step = this.state.step;
@@ -37,9 +77,9 @@ class Questions extends React.Component {
                         <QuestionTitle>
                             <h1>How much <span>time</span> do you have?</h1>
                         </QuestionTitle>
-                        <Slider />
+                        <CustomizedSlider value={this.state.time} onChange={(newValue) => this.changeTime(newValue)}/>
                         <div className="sticky-bottom">
-                            <ButtonPrimary value="Next" onClick={() => this.changeView('mood')}/>
+                            <ButtonPrimary value="Next" onClick={() => this.changeStep('mood')}/>
                         </div>
                     </Question>
                 )
@@ -55,7 +95,7 @@ class Questions extends React.Component {
                         <ButtonSelect value="Only Audios" isSelected={this.state.format === 'only-audios'} onClick={() => this.changeFormat('only-audios')}/>
 
                         <div className="sticky-bottom">
-                            <ButtonPrimary value="Next" onClick={() => this.changeView('story')}/>
+                            <ButtonPrimary value="Next" onClick={() => this.requestStories()}/>
                         </div>
                     </Question>
                 )
@@ -66,17 +106,22 @@ class Questions extends React.Component {
                             <h1>Choose your <span>story</span></h1>
                         </QuestionTitle>
                         <StoryCard 
-                            headline="Mit Satellitenaufnahmen die Probleme der Welt lösen"
-                            subheadline="Google Earth Engine"
-                            imgUrl="https://www.srf.ch/static/cms/images/1280ws/d7f593.webp"
+                            onClick={() => this.openStory(this.state.stories[0].id)}
+                            headline={this.state.stories[0].title}
+                            subheadline={this.state.stories[0].lead}
+                            imgUrl={this.state.stories[0].thumbnail}
                         /> 
                         <StoryCard 
-                            headline="Corona-Tests sollen kosten – Bundesrat gewährt aber Schonfrist"
-                            subheadline="Entscheid zum Covid-Zertifikat"
-                            imgUrl="https://www.srf.ch/static/cms/images/1280ws/b8d245.webp"
+                            onClick={() => this.openStory(this.state.stories[1].id)}
+                            headline={this.state.stories[1].title}
+                            subheadline={this.state.stories[1].lead}
+                            imgUrl={this.state.stories[1].thumbnail}
                         /> 
                         <OrSeparator/>
-                        <ButtonSecondary value="Explore"/>
+                        <ButtonSecondary 
+                            value="Explore"
+                            onClick={() => this.openStory(this.state.stories[2].id)}
+                        />
                         <ButtonSecondary value="Daily News"/>
                     </Question>
                 )

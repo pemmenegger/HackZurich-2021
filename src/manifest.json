@@ -1,0 +1,8 @@
+{
+  "name": "Story Hub",
+  "short_name": "Story Hub",
+  "lang": "de-CH",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff"
+}

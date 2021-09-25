@@ -1,0 +1,50 @@
+{
+  "name": "rigiwindegg-website",
+  "version": "4.0.0",
+  "description": "Rigi Windegg Webseite",
+  "repository": "repository",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js --hot",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "keywords": [
+    "reactjs"
+  ],
+  "browserslist": [
+    "defaults",
+    "> 0.1%",
+    "ie > 9"
+  ],
+  "author": "Tinystudio",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.15.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.3.0",
+    "react-transition-group": "^4.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "autoprefixer": "^10.2.4",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.0.0",
+    "postcss-loader": "^5.0.0",
+    "sass": "^1.32.6",
+    "sass-loader": "^11.0.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  }
+}

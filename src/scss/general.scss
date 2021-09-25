@@ -9,6 +9,7 @@ body {
     font-size: $regular;
     background-color: $white;
     color: $black;
+    min-height: 100vh;
 }
 
 .content {
@@ -69,7 +70,7 @@ button {
     width: 70px;
     background-image: url('./img/logo.png');
     background-size: 100% auto;
-    
+
 }
 
 button {
@@ -116,6 +117,29 @@ button {
     }
 }
 
+.btn-select-wrapper {
+    position: relative;
+    height: 70px;
+
+    button {
+        text-align: left;
+        padding-left: 20px;
+        position: absolute;
+        background-color: $light-grey;
+    }
+
+    .icon-select {
+        position: absolute;
+        right: 20px;
+        width: 16px;
+        height: 16px;
+        background-image: url('./img/selected.png');
+        background-size: 100% auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
 .question {
     h1 {
         font-size: 38px;
@@ -133,7 +157,7 @@ button {
 .or-separator {
     p {
         overflow: hidden;
-        text-align:center;
+        text-align: center;
         font-size: 14px;
         line-height: 14px;
         color: $black;
@@ -149,7 +173,7 @@ button {
             margin-right: -50%;
         }
 
-        &:before, 
+        &:before,
         &:after {
             background-color: $black;
             content: "";
@@ -201,7 +225,7 @@ button {
                 font-size: 25px;
                 color: $white;
                 font-weight: $semi-bold;
-                
+
             }
         }
     }
@@ -226,4 +250,40 @@ button {
 
 .fade-exit-active {
     opacity: 0;
+}
+
+.slider-box {
+    width: 100%;
+    position: relative;
+
+    .label {
+        width: 30%;
+        position: absolute;
+        right: 0;
+
+        #non-linear-slider {
+            line-height: 46px;
+            vertical-align: middle;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: $semi-bold;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+    }
+
+    .MuiSlider-colorPrimary {
+        width: 65%;
+        left: 15px;
+    }
+}
+
+.sticky-bottom {
+    position: absolute;
+    bottom: 100px;
+    width: 90%;
+}
+
+.MuiSlider-thumb.Mui-active {
+    box-shadow: 0px 0px 0px 14px rgba(34, 34, 34, .1) !important;
+
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import FadeInOut from '../components/transitions/FadeInOut.jsx';
-import { Question, QuestionTitle, ButtonPrimary, ButtonSecondary, Logo, OrSeparator } from "../components/stateless.js"
+import { Question, QuestionTitle, ButtonPrimary, ButtonSecondary, Logo, OrSeparator, ButtonSelect } from "../components/stateless.js"
 import StoryCard from '../components/StoryCard';
+import Slider from '../components/Slider';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -11,6 +12,7 @@ class Questions extends React.Component {
 		super();
         this.state = {
             step: 'time',
+            format: 'best-experience'
         };
 	}
 
@@ -20,17 +22,25 @@ class Questions extends React.Component {
         })
     }
 
+    changeFormat(newFormat) {
+        this.setState({
+            format: newFormat
+        })
+    }
+
     renderCurrentQuestion() {
         let step = this.state.step;
         switch(step) {
-            case 'story':
+            case 'time':
                 return (
                     <Question>
                         <QuestionTitle>
                             <h1>How much <span>time</span> do you have?</h1>
                         </QuestionTitle>
-                        <p>slider</p>
-                        <ButtonPrimary value="Next" onClick={() => this.changeView('mood')}/>
+                        <Slider />
+                        <div className="sticky-bottom">
+                            <ButtonPrimary value="Next" onClick={() => this.changeView('mood')}/>
+                        </div>
                     </Question>
                 )
             case 'mood':
@@ -39,13 +49,17 @@ class Questions extends React.Component {
                         <QuestionTitle>
                             <h1>What do you <span>like</span> right now?</h1>
                         </QuestionTitle>
-                        <ButtonSecondary value="Reading"/>
-                        <ButtonSecondary value="Listening"/>
-                        <ButtonSecondary value="Watching"/>
-                        <ButtonPrimary value="Next" onClick={() => this.changeView('story')}/>
+
+                        <ButtonSelect value="Best experience" isSelected={this.state.format === 'best-experience'} onClick={() => this.changeFormat('best-experience')}/>
+                        <ButtonSelect value="Only Videos" isSelected={this.state.format === 'only-videos'} onClick={() => this.changeFormat('only-videos')}/>
+                        <ButtonSelect value="Only Audios" isSelected={this.state.format === 'only-audios'} onClick={() => this.changeFormat('only-audios')}/>
+
+                        <div className="sticky-bottom">
+                            <ButtonPrimary value="Next" onClick={() => this.changeView('story')}/>
+                        </div>
                     </Question>
                 )
-            case 'time':
+            case 'story':
                 return (
                     <Question>
                         <QuestionTitle>

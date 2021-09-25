@@ -10,6 +10,9 @@ module.exports = merge(common, {
   // remove target at webpack-dev-server 4+ (needed for hot reload)
   target: "browserslist",
   devtool: 'source-map',
+  output: {
+    publicPath: '/HackZurich21/'
+  },
   optimization: {
     minimizer: [new TerserPlugin({
       extractComments: false,

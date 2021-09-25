@@ -87,3 +87,15 @@ export const ButtonSecondary = (props) => {
         <Button {...props} theme="btn-secondary" />
     )
 }
+
+export const ButtonSelect = (props) => {
+    const {
+        isSelected
+    } = props;
+    return (
+        <div className="btn-select-wrapper">
+            <Button {...props} theme="btn-select" />
+            {isSelected ? <div className="icon-select"></div> : null}            
+        </div>
+    )
+}

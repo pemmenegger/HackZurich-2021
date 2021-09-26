@@ -79,9 +79,9 @@ class Questions extends React.Component {
             case 'time':
                 return (
                     <Question>
-                        <h1 className="font-body text-xl text-center font-normal mb-8">
+                        <div className="font-body text-xl text-center font-normal mb-8">
                             <h1>I have time for about <span className="font-semibold">{this.state.time} Minutes</span></h1>
-                        </h1>
+                        </div>
                         <div className="mt-0 mb-0 mr-auto ml-auto w-10/12">
                           <Slider 
                             min={1}
@@ -99,9 +99,9 @@ class Questions extends React.Component {
             case 'mood':
                 return (
                     <Question>
-                        <h1 className="font-body text-xl text-center font-normal mb-8">
+                        <div className="font-body text-xl text-center font-normal mb-8">
                             <h1>What do you <span className="font-semibold">like</span> right now?</h1>
-                        </h1>
+                        </div>
 
                         <ButtonSelect value="Best experience" isSelected={this.state.format === 'best-experience'} onClick={() => this.changeFormat('best-experience')}/>
                         <ButtonSelect value="Only Videos" isSelected={this.state.format === 'only-videos'} onClick={() => this.changeFormat('only-videos')}/>
@@ -115,9 +115,9 @@ class Questions extends React.Component {
             case 'story':
                 return (
                     <Question>
-                        <h1 className="font-body text-xl text-center font-normal mb-8">
+                        <div className="font-body text-xl text-center font-normal mb-8">
                             <h1>Choose your <span className="font-semibold">story</span></h1>
-                        </h1>
+                        </div>
                         <StoryCard 
                             onClick={() => this.openStory(this.state.stories[0].id)}
                             headline={this.state.stories[0].title}

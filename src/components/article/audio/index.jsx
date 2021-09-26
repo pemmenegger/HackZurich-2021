@@ -10,7 +10,7 @@ const AudioBlock = ({ value }) => {
             src={value}
             width="100%"
             height="550px"
-            frameborder="0"
+            frameBorder="0"
             allowtransparency="true"
             allow="encrypted-media"
           ></iframe>

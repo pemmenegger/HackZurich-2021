@@ -20,7 +20,12 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      margin: ["first"],
+    },
   },
-  plugins: [],
+  plugins: [
+    require("./tailwind/plugins/content-container"),
+    require("./tailwind/plugins/text-styles"),
+  ],
 };

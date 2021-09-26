@@ -2,15 +2,15 @@ import React from 'react';
 
 export const Question = (props) => {
     return (
-        <div className="question">
+        <div className="font-body">
             {props.children}
         </div>
     )
 }
 
-export const QuestionTitle = (props) => {
+export const StickyBottom = (props) => {
     return (
-        <div className="title">
+        <div className="absolute bottom-6 w-11/12">
             {props.children}
         </div>
     )
@@ -18,9 +18,12 @@ export const QuestionTitle = (props) => {
 
 export const Logo = (props) => {
     return (
-        <div className="logo">
-            {props.children}
-        </div>
+        <img
+          src={process.env.PUBLIC_URL +'/logo.png'}
+          title="Story Hub"
+          className="mt-12 mb-9 mr-auto ml-auto w-16 h-auto"
+          alt="Story Hub Logo"
+        />
     )
 }
 
@@ -32,31 +35,17 @@ export const OrSeparator = (props) => {
     )
 }
 
-/**
- * ICONS
- */
-
-const Icon = (props) => {
-    const {
-        onClick,
-        icon,
-    } = props;
+export const SelectedIcon = (props) => {
     return (
-        <div onClick={() => onClick()} className={"icon " + icon}></div>
+        <img
+          src={process.env.PUBLIC_URL +'/selected.png'}
+          title="Selected"
+          className={props.className}
+          alt="Selected"
+        />
     )
 }
 
-export const CloseIcon = (props) => {
-    return (
-        <Icon {...props} icon="close-icon"/>
-    )
-}
-
-export const SettingsIcon = (props) => {
-    return (
-        <Icon {...props} icon="settings-icon"/>
-    )
-}
 
 /**
  * BUTTONS
@@ -64,27 +53,27 @@ export const SettingsIcon = (props) => {
 
 const Button = (props) => {
     const {
-        isSubmitting,
         value,
         onClick,
-        theme,
+        className,
     } = props;
+
     return (
-        <button onClick={() => onClick()} className={theme}>
-            {isSubmitting ? <div className="loadingSubmit"></div> : value}
-        </button>
+        <div onClick={() => onClick()} className={"w-full mb-4 pt-4 pb-4 rounded-lg text-m font-semibold " + className}>
+            {value}
+        </div>
     )
 }
 
 export const ButtonPrimary = (props) => {
     return (
-        <Button {...props} theme="btn-primary"/>
+        <Button {...props} className="bg-violett text-white text-center"/>
     )
 }
 
 export const ButtonSecondary = (props) => {
     return (
-        <Button {...props} theme="btn-secondary" />
+        <Button {...props} className="bg-white text-black border border-black text-center" />
     )
 }
 
@@ -93,9 +82,37 @@ export const ButtonSelect = (props) => {
         isSelected
     } = props;
     return (
-        <div className="btn-select-wrapper">
-            <Button {...props} theme="btn-select" />
-            {isSelected ? <div className="icon-select"></div> : null}            
+        <div className="relative h-70">
+            <Button {...props} className="bg-lightGrey text-black text-left pl-4" />
+            {isSelected ? <SelectedIcon className="h-5 w-auto absolute right-0 top-1/2 transform -translate-y-1/2 mr-4" /> : null}            
+        </div>
+    )
+}
+
+/**
+ * CARDS
+ */
+
+export const StoryCard = (props) => {
+    const {
+        headline,
+        subheadline,
+        imgUrl,
+        onClick,
+    } = props;
+    return (
+        <div className="relative h-52 rounded-lg overflow-hidden mb-4" onClick={onClick}>
+            <img
+                src={imgUrl}
+                title="Story Preview Thumbnail"
+                className="w-full h-full absolute top-0 left-0 object-cover object-center"
+                alt="Story Preview Thumbnail"
+            />
+            <div className="absolute w-full h-full bg-black opacity-40 z-10"></div>
+            <div className="absolute z-20 bottom-0 pl-3 pr-3 pb-5">
+                <p className="text-white text-s pb-2">{subheadline}</p>
+                <p className="text-white text-l font-semibold">{headline}</p>
+            </div>
         </div>
     )
 }

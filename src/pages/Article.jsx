@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ArticleIntro from "../components/article/intro";
 import TextBlock from "../components/article/textblock";
 import Video from "../components/article/video";
@@ -6,10 +6,36 @@ import QuoteBlock from "../components/article/zitat";
 import AudioBlock from "../components/article/audio";
 import ImageBlock from "../components/article/image";
 import BackIcon from "../components/icons/backicon";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://hbr26fk6lf.execute-api.eu-central-1.amazonaws.com",
+  headers: { "Content-Type": "application/json" },
+});
 
 const Article = () => {
+  const [stories, setStories] = useState([]);
   const history = useHistory();
+  const { id } = useParams();
+
+  const fetchArticles = async () => {
+    try {
+      const response = await api.get(`/stage/story/${id}`);
+      let data = await JSON.parse(response.data.body);
+      setStories(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  useEffect(() => {
+    console.log("stories", stories);
+  }, [stories]);
 
   return (
     <>

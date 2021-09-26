@@ -1,7 +1,7 @@
 import cls from "classnames";
 import React from "react";
 
-const TextBlock = ({ text, type = "text" }) => {
+const TextBlock = ({ value, type = "text" }) => {
   return (
     <>
       <div
@@ -10,7 +10,7 @@ const TextBlock = ({ text, type = "text" }) => {
           type === "lead" && `font-bold`
         )}
       >
-        <p>{text}</p>
+        <p>{value}</p>
       </div>
     </>
   );

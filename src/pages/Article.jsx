@@ -9,21 +9,41 @@ import BackIcon from "../components/icons/backicon";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 
+const renderComponents = (components) => (entry) => {
+  const Component = components[entry.type];
+
+  if (Component === undefined) {
+    return null;
+  }
+
+  return <Component key={entry.id} {...entry} />;
+};
+
+const Components = {
+  paragraph: TextBlock,
+  video: Video,
+  quote: QuoteBlock,
+  audio: AudioBlock,
+  images: ImageBlock,
+};
+
+const renderSectionEntry = renderComponents(Components);
+
 const api = axios.create({
   baseURL: "https://hbr26fk6lf.execute-api.eu-central-1.amazonaws.com",
   headers: { "Content-Type": "application/json" },
 });
 
 const Article = () => {
-  const [stories, setStories] = useState([]);
+  const [story, setStory] = useState(undefined);
   const history = useHistory();
   const { id } = useParams();
 
   const fetchArticles = async () => {
     try {
       const response = await api.get(`/stage/story/${id}`);
-      let data = await JSON.parse(response.data.body);
-      setStories(data);
+      const { story } = response.data;
+      setStory(story);
     } catch (error) {
       console.log("error", error);
     }
@@ -34,98 +54,30 @@ const Article = () => {
   }, []);
 
   useEffect(() => {
-    console.log("stories", stories);
-  }, [stories]);
+    console.log("stories", story);
+  }, [story]);
 
   return (
     <>
-      <div
-        onClick={() => history.push("/questions")}
-        className="fixed top-5 left-5 z-50 w-7 h-7 transform rotate-180"
-      >
-        <BackIcon />
-      </div>
-      <ArticleIntro
-        title="16 Jahre Angela Merkel: Was wird aus den Deutschen, wenn Mutti weg
-        ist?"
-        author="Merlin Gelpeko"
-        duration="20 Minuten"
-        bg="https://www.srf.ch/static/cms/images/640ws/3dcb61.jpg"
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-        type="lead"
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <ImageBlock
-        images={[
-          "https://www.srf.ch/static/cms/images/640ws/3dcb61.jpg",
-          "https://www.srf.ch/static/cms/images/640ws/7f0233.jpg",
-          "https://www.srf.ch/static/cms/images/480ws/afc7cc.jpg",
-        ]}
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <QuoteBlock
-        text="... 16 Jahre Angela Merkel: Was wird aus den Deutschen, wenn Mutti weg ist? ..."
-        author="Pascal Emmengegger"
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <Video video="https://player.vimeo.com/video/614783445?h=e2b585d7d8" />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
-      <AudioBlock audio="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" />
-      <QuoteBlock
-        text="... 16 Jahre Angela Merkel: Was wird aus den Deutschen, wenn Mutti weg ist? ..."
-        author="Pascal Emmengegger"
-      />
-      <TextBlock
-        text="Drohende Bundestagswahlen versetzen den allgemeinen Gemütszustand in
-          kollektive Schwingungen. Was derzeit vor allem auffällt: wie
-          steigerungsfähig die sprichwörtliche schlechte Laune noch ist im Land
-          der Schwarzseher und Nörgler. Mit Pandemiemüdigkeit alleine lässt sich
-          das nicht erklären."
-      />
+      {story && (
+        <>
+          <div
+            onClick={() => history.push("/questions")}
+            className="fixed top-5 left-5 z-50 w-7 h-7 transform rotate-180"
+          >
+            <BackIcon />
+          </div>
+          <ArticleIntro
+            title={story.title}
+            author="Merlin Gelpeko"
+            duration={`${story.consume_time} Sekunden`}
+            bg={story.thumbnail}
+          />
+          {story.body.map((block, i) => {
+            return <>{renderSectionEntry({ ...block, id: i })}</>;
+          })}
+        </>
+      )}
     </>
   );
 };

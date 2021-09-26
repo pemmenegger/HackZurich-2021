@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Video = ({ video }) => {
+const Video = ({ value }) => {
   const [screenHeight, setScreenHeight] = useState();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Video = ({ video }) => {
         <div className="absolute top-0 left-0 w-full h-full">
           <iframe
             title="video"
-            src={video}
+            src={value}
             width={9 * (screenHeight / 16)}
             height={screenHeight}
             frameBorder="0"

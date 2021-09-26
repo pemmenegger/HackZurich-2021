@@ -6,7 +6,9 @@ module.exports = {
       'body': ['"Open Sans"']
     },
     fontSize: {
+      s: ['16px', '1'],
       m: ['20px', '1'],
+      l: ['25px', '1.15'],
       xl: ['38px', '1.2'],
     },
     extend: {

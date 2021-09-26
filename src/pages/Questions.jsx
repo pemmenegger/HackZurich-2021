@@ -7,8 +7,8 @@ import {
   Logo,
   OrSeparator,
   ButtonSelect,
+  StoryCard
 } from "../components/stateless.js";
-import StoryCard from "../components/StoryCard";
 import { Slider } from "../components/Slider";
 import { withRouter } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -69,6 +69,7 @@ class Questions extends React.Component {
     }
 
     openStory(storyId) {
+      console.log(storyId)
         this.props.history.push(`/story/${storyId}`)
     }   
 
@@ -135,6 +136,7 @@ class Questions extends React.Component {
                             onClick={() => this.openStory(this.state.stories[2].id)}
                         />
                         <ButtonSecondary value="Daily News"/>
+                        <div className="mb-12"></div>
                     </Question>
                 )
             default: 

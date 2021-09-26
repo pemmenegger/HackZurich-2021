@@ -10,7 +10,7 @@ export const Question = (props) => {
 
 export const StickyBottom = (props) => {
     return (
-        <div className="absolute bottom-3 w-11/12">
+        <div className="absolute bottom-6 w-11/12">
             {props.children}
         </div>
     )
@@ -34,33 +34,6 @@ export const OrSeparator = (props) => {
         </div>
     )
 }
-
-/**
- * ICONS
- */
-
-const Icon = (props) => {
-    const {
-        onClick,
-        icon,
-    } = props;
-    return (
-        <div onClick={() => onClick()} className={"icon " + icon}></div>
-    )
-}
-
-export const CloseIcon = (props) => {
-    return (
-        <Icon {...props} icon="close-icon"/>
-    )
-}
-
-export const SettingsIcon = (props) => {
-    return (
-        <Icon {...props} icon="settings-icon"/>
-    )
-}
-
 
 export const SelectedIcon = (props) => {
     return (
@@ -86,7 +59,7 @@ const Button = (props) => {
     } = props;
 
     return (
-        <div onClick={() => onClick()} className={"w-full mb-4 pt-4 pb-4 rounded-lg text-m	" + className}>
+        <div onClick={() => onClick()} className={"w-full mb-4 pt-4 pb-4 rounded-lg text-m font-semibold " + className}>
             {value}
         </div>
     )
@@ -112,6 +85,34 @@ export const ButtonSelect = (props) => {
         <div className="relative h-70">
             <Button {...props} className="bg-lightGrey text-black text-left pl-4" />
             {isSelected ? <SelectedIcon className="h-5 w-auto absolute right-0 top-1/2 transform -translate-y-1/2 mr-4" /> : null}            
+        </div>
+    )
+}
+
+/**
+ * CARDS
+ */
+
+export const StoryCard = (props) => {
+    const {
+        headline,
+        subheadline,
+        imgUrl,
+        onClick,
+    } = props;
+    return (
+        <div className="relative h-52 rounded-lg overflow-hidden mb-4" onClick={onClick}>
+            <img
+                src={imgUrl}
+                title="Story Preview Thumbnail"
+                className="w-full h-full absolute top-0 left-0 object-cover object-center"
+                alt="Story Preview Thumbnail"
+            />
+            <div className="absolute w-full h-full bg-black opacity-40 z-10"></div>
+            <div className="absolute z-20 bottom-0 pl-3 pr-3 pb-5">
+                <p className="text-white text-s pb-2">{subheadline}</p>
+                <p className="text-white text-l font-semibold">{headline}</p>
+            </div>
         </div>
     )
 }

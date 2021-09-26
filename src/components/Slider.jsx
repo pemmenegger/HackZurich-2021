@@ -1,8 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
-
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -30,34 +27,26 @@ const theme = createTheme({
 });
 
 
-export default function StoryHubSlider() {
-  const [value, setValue] = React.useState(15);
+const CustomizedSlider = (props) => {
 
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
-      setValue(newValue);
+      props.onChange(newValue)
     }
   };
 
   return (
-    <Box sx={{ width: '100%' }} className="slider-box">
-        <div className="label">
-            <Typography id="non-linear-slider" gutterBottom> 
-                {value} Min
-            </Typography>
-        </div>
-        <div className="slider">
-            <Slider
-                value={value}
-                min={1}
-                step={1}
-                max={30}
-                onChange={handleChange}
-                aria-labelledby="non-linear-slider"
-                color="primary"
-                theme={theme}
-            />
-         </div>
-    </Box>
+    <Slider
+        value={props.value}
+        min={props.min}
+        step={props.step}
+        max={props.max}
+        onChange={handleChange}
+        aria-labelledby="non-linear-slider"
+        color="primary"
+        theme={theme}
+    />
   );
 }
+
+export { CustomizedSlider as Slider };

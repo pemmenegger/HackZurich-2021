@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/HackZurich21/static/css/main.310101b9.chunk.css",
-    "main.js": "/HackZurich21/static/js/main.51a28f46.chunk.js",
-    "main.js.map": "/HackZurich21/static/js/main.51a28f46.chunk.js.map",
+    "main.css": "/HackZurich21/static/css/main.7f7b5c0c.chunk.css",
+    "main.js": "/HackZurich21/static/js/main.6adfa971.chunk.js",
+    "main.js.map": "/HackZurich21/static/js/main.6adfa971.chunk.js.map",
     "runtime-main.js": "/HackZurich21/static/js/runtime-main.4c490162.js",
     "runtime-main.js.map": "/HackZurich21/static/js/runtime-main.4c490162.js.map",
     "static/js/2.3c71f0ea.chunk.js": "/HackZurich21/static/js/2.3c71f0ea.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.b0869f5f.chunk.js": "/HackZurich21/static/js/3.b0869f5f.chunk.js",
     "static/js/3.b0869f5f.chunk.js.map": "/HackZurich21/static/js/3.b0869f5f.chunk.js.map",
     "index.html": "/HackZurich21/index.html",
-    "static/css/main.310101b9.chunk.css.map": "/HackZurich21/static/css/main.310101b9.chunk.css.map",
+    "static/css/main.7f7b5c0c.chunk.css.map": "/HackZurich21/static/css/main.7f7b5c0c.chunk.css.map",
     "static/js/2.3c71f0ea.chunk.js.LICENSE.txt": "/HackZurich21/static/js/2.3c71f0ea.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4c490162.js",
     "static/js/2.3c71f0ea.chunk.js",
-    "static/css/main.310101b9.chunk.css",
-    "static/js/main.51a28f46.chunk.js"
+    "static/css/main.7f7b5c0c.chunk.css",
+    "static/js/main.6adfa971.chunk.js"
   ]
 }
